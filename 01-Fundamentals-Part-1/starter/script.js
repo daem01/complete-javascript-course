@@ -25,9 +25,8 @@ let job1 = 'IT Support Specialist';
 let job2 = 'Font End Developer';
 
 console.log(myCurentJob);
-*/
 
-/* Data Types
+// Data Types
 let javaScriptIsFun = true;
 console.log('JavaScript is FUN!', javaScriptIsFun);
 
@@ -47,9 +46,8 @@ year = 1991;
 console.log('Variable year defined:', year);
 
 console.log('typeof null:', typeof null);
-*/
 
-/* let, const, var
+// LET, CONST, VAR
 let age = 30;
 age = 31; // Reassingment or Mutation
 
@@ -67,6 +65,42 @@ job = 'Support Specialist';
 // No Declaration still works but terrible idea
 lastName = 'Moser';
 console.log(lastName);
-*/
+
 
 // Basic Operators
+//Math operators
+const now = 2024;
+const ageDoug = now - 2001;
+const ageSarah = now - 2003;
+console.log(ageDoug, ageSarah);
+
+console.log(ageDoug * 2, ageDoug / 10, 2 ** 3);
+// 2 ** 3 means 2 to the power of 3
+
+const firstName = 'Doug';
+const lastName = 'Moser';
+console.log(firstName + ' ' + lastName);
+
+// Assignment operators
+let x = 10 + 5; //15
+x += 10; // 25
+x *= 4; // 100
+x++;
+x--;
+x--;
+console.log(x);
+
+// Comparison operators
+console.log(ageDoug > ageSarah); // <, >=, <=
+console.log(ageSarah >= 18);
+
+const isFullAge = ageSarah >= 18;
+
+console.log(now - 2001 > now - 2003);
+*/
+
+const now = 2024;
+const ageDoug = now - 2001;
+const ageSarah = now - 2003;
+
+console.log(now - 2001 > now - 2003);
