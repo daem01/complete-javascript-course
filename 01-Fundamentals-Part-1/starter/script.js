@@ -99,8 +99,18 @@ const isFullAge = ageSarah >= 18;
 console.log(now - 2001 > now - 2003);
 */
 
+// Operator Precedence
 const now = 2024;
 const ageDoug = now - 2001;
 const ageSarah = now - 2003;
 
 console.log(now - 2001 > now - 2003);
+
+console.log(25 - 10 - 5);
+
+let x, y;
+x = y = 25 - 5 - 10; // x = y = 10, x = 10
+console.log(x, y);
+
+const averageAge = (ageDoug + ageSarah) / 2;
+console.log(ageDoug, ageSarah, averageAge);
