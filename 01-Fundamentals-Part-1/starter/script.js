@@ -138,7 +138,7 @@ console.log(`String
 with
 multiple
 lines`);
-*/
+
 
 // Taking Decisions: if / else statements
 const age = 15;
@@ -158,3 +158,6 @@ if (birthYear <= 2000) {
     century = 21;
 };
 console.log(`${century}st Century`);
+*/
+
+// Type Conversion and Coercion
