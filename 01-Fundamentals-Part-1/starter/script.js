@@ -158,6 +158,54 @@ if (birthYear <= 2000) {
     century = 21;
 };
 console.log(`${century}st Century`);
-*/
+
 
 // Type Conversion and Coercion
+// conversion
+const inputYear = '1991';
+console.log(`Converting String to Number: ${Number(inputYear)}
+As String: ${inputYear}`);
+console.log(Number(inputYear) + 18);
+
+console.log(`Trying to convert 'Doug' to Number: ${Number('Doug')}`);
+console.log(`Typeof NaN = ${typeof NaN}`);
+
+console.log(`Converting Number to String: ${String(23)}
+As Number: ${23}`);
+
+// coercion
+console.log('I am ' + 23 + ' years old');
+console.log('23' - '10' - 3);
+console.log('23' * '2');
+console.log('23' / '2');
+
+let n = '1' + 1; // 11
+n = n - 1;
+console.log(n);
+
+
+// Truthy and Falsy Values
+// 5 Falsy Values: 0, '', undefined, null, NaN
+
+console.log(Boolean(0));
+console.log(Boolean(undefined));
+console.log(Boolean('Doug'));
+console.log(Boolean({}));
+console.log(Boolean(''));
+
+const money = 100;
+if (money) {
+    console.log("Don't spend it all!");
+} else {
+    console.log("You should get a job!")
+};
+
+let height = 0;
+if (height) {
+    console.log('YAY! Hieght is defined');
+} else {
+    console.log('Height is UNDEFINED');
+};
+*/
+
+// Equality Operators: == vs ===
