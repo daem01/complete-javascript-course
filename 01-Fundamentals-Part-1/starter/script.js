@@ -206,6 +206,26 @@ if (height) {
 } else {
     console.log('Height is UNDEFINED');
 };
-*/
+
 
 // Equality Operators: == vs ===
+const age = 18;
+if (age === 18) console.log('You just became an adult. (Strict)'); // doesn't support type coercion
+if (age == '18') console.log('You just became an adult. (Loose)'); // supports type coercion
+
+const favorite = Number(prompt("What is your favorite number?"));
+console.log(favorite);
+console.log(typeof favorite);
+
+if (favorite === 4) {
+    console.log(`Cool! ${favorite} is an amazing number!`)
+} else if (favorite === 7) {
+    console.log(`${favorite} is also a cool number!`)
+} else {
+    console.log('Number is not 4 or 7');
+}
+
+if (favorite !== 4) console.log('Why not 4?');
+*/
+
+// Boolean Logic
