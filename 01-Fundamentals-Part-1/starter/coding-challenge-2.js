@@ -23,6 +23,7 @@ console.log("John's BMI is", BMIJohn);
 
 console.log("Is Mark's BMI heigher than John's:", BMIMark > BMIJohn);
 
+// Added Code
 if (BMIMark > BMIJohn) {
     console.log(`Mark's BMI is higher than John's!`);
 } else {
@@ -55,6 +56,7 @@ console.log("John's BMI is", BMIJohn);
 
 console.log("Is Mark's BMI heigher than John's:", BMIMark > BMIJohn);
 
+// Added Code
 if (BMIMark > BMIJohn) {
     console.log(`Mark's BMI is higher than John's!`);
 } else {
