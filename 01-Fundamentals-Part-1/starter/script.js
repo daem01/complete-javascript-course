@@ -251,3 +251,5 @@ if (hasDriversLicense && hasGoodVision && !isTired) {
     console.log('Someone else should drive...');
 };
 */
+
+// The switch Statement
