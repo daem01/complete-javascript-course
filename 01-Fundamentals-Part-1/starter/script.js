@@ -114,6 +114,38 @@ console.log(x, y);
 
 const averageAge = (ageDoug + ageSarah) / 2;
 console.log(ageDoug, ageSarah, averageAge);
-*/
+
 
 // Strings and Template Literals
+const firstName = 'Doug';
+const job = 'IT Specialist';
+const birthYear = 2001;
+const year = 2024;
+
+const doug = "I'm " + firstName + ', a ' + (year - birthYear) + ' year old ' + job + '!';
+console.log(doug);
+
+const dougNew = `I'm ${firstName}, a ${year - birthYear} year old ${job}!`;
+console.log(dougNew);
+
+console.log(`Just a regular string...`);
+
+console.log('String with \n\
+multiple \n\
+lines');
+
+console.log(`String
+with
+multiple
+lines`);
+*/
+
+// Taking Decisions: if / else statements
+const age = 15;
+
+if (age >= 18) {
+    console.log(`Sarah can start driving! 😊`)
+} else {
+    const yearsLeft = 18 - age;
+    console.log(`Sarah cannot start driving. 😒 Wait another ${yearsLeft} years.`);
+}
