@@ -1,4 +1,3 @@
-// Data 1
 const scoreDolphins = (96 + 108 + 89) / 3;
 const scoreKoalas = (88 + 91 + 110) / 3;
 console.log(`Dolphins Average Score: ${scoreDolphins.toFixed(2)}
