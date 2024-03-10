@@ -301,3 +301,12 @@ if (day === 'monday') {
 */
 
 // Statements and Expressions
+// Expressions (produces a value)
+// 3 + 4
+// 1991
+// true && false && !false
+
+// Statements (Performs actions; Doesn't produce value)
+// if (23 > 10) {
+//     const str = '23 is bigger'; The string itself is an expression
+// }
