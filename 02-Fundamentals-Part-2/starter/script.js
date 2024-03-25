@@ -206,4 +206,94 @@ if (friends.includes('Steven')) {
 }
 ////////////////////////
 INTRODUCTION TO OBJECTS
+///////////////////////
+const doug = {
+    firstName: 'Doug',
+    lastName: 'Moser',
+    age: 2024 - 2001,
+    job: 'IT Support Specialist',
+    friends: ['Mike, Isaac, Aaron, Garrett']
+};
+/////////////////////////
+DOT VS. BRACKET NOTATION
+////////////////////////
+const doug = {
+    firstName: 'Doug',
+    lastName: 'Moser',
+    age: 2024 - 2001,
+    job: 'IT Support Specialist',
+    friends: ['Mike', 'Isaac', 'Aaron', 'Garrett']
+};
+console.log(doug);
+
+console.log(doug.lastName);
+console.log(doug['lastName']);
+
+const nameKey = 'Name';
+console.log(doug['first' + nameKey]);
+console.log(doug['last' + nameKey]);
+
+// const interestedIn = prompt('What do you want to know about Doug? Choose between firstName, lastName, age, job, and friends.');
+
+// if (doug[interestedIn]) {
+//     console.log(doug[interestedIn]);
+// } else {
+//     console.log('Wrong request! Choose between firstName, lastName, age, job, and friends.');
+// }
+
+doug.location = 'Illinois';
+doug['instagram'] = '@dougmoser_';
+console.log(doug);
+
+// Challenge
+// Log "Doug has 3 friends, and his best friend is Mike" dynamically.
+console.log(`${doug.firstName} has ${doug.friends.length} friends, and his best friend is ${doug.friends[0]}.`)
+
+///////////////
+OBJECT METHODS
+//////////////
+const doug = {
+    firstName: 'Doug',
+    lastName: 'Moser',
+    birthYear: 2001,
+    job: 'IT Support Specialist',
+    friends: ['Mike', 'Isaac', 'Aaron', 'Garrett'],
+    hasDriversLicense: true,
+
+    // function expression
+    // calcAge: function (birthYear) {
+    //     return 2024 - birthYear;
+    // }
+
+    // this keyword
+    // calcAge: function () {
+    //     // console.log(this);
+    //     return 2024 - this.birthYear;
+    // }
+
+    // storing value in new key --- most effiecient solution
+    calcAge: function () {
+        this.age = 2024 - this.birthYear
+        return this.age;
+    },
+
+    getSummary: function () {
+        return `${this.firstName} is a ${this.calcAge()} year old ${this.job}, and he ${this.hasDriversLicense ? 'has' : "doesn't have"} a driver's license.`
+    }
+};
+
+console.log(doug.calcAge());
+
+console.log(doug.age);
+console.log(doug.age);
+console.log(doug.age);
+
+// Challenge
+// Write "Doug is a 23 year old IT Support Specialist, and he has a/no driver's license." dynamically
+console.log(`${doug.firstName} is a ${doug.age} year old ${doug.job}, and he ${doug.hasDriversLicense ? 'has' : "doesn't have"} a driver's license.`)
+
+console.log(doug.getSummary());
+
+////////////////////////
+ITERATION: THE for LOOP
 ///////////////////////*/
