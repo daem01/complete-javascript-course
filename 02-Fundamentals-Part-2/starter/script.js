@@ -296,4 +296,123 @@ console.log(doug.getSummary());
 
 ////////////////////////
 ITERATION: THE for LOOP
-///////////////////////*/
+///////////////////////
+// console.log('Lifting weights repietition 1');
+// console.log('Lifting weights repietition 2');
+// console.log('Lifting weights repietition 3');
+// console.log('Lifting weights repietition 4');
+// console.log('Lifting weights repietition 5');
+// console.log('Lifting weights repietition 6');
+// console.log('Lifting weights repietition 7');
+// console.log('Lifting weights repietition 8');
+// console.log('Lifting weights repietition 9');
+// console.log('Lifting weights repietition 10');
+
+for (let i = 1; i <= 10; i++) {
+    console.log(`Lifting weights repetition ${i} 🏋️‍♂️.`)
+}
+
+////////////////////////////////////////
+LOOPING ARRAYS. BREAKING AND CONTINUING
+///////////////////////////////////////
+const dougArray = [
+    'Doug',
+    'Moser',
+    2024 - 2001,
+    'IT Support Specialist',
+    ['Mike, Isaac, Aaron, Garrett'],
+    true
+];
+
+const typeArray = [];
+
+for (let i = 0; i < dougArray.length; i++) {
+    // Reading from dougArray
+    console.log(dougArray[i], typeof dougArray[i]);
+
+    // Filling typeArray
+    typeArray.push(typeof dougArray[i]);
+}
+
+console.log(typeArray);
+
+// Practical Example
+const years = [1991, 2007, 1969, 2020];
+const ages = [];
+for (let i = 0; i < years.length; i++) {
+    ages.push(2024 - years[i]);
+}
+console.log(ages);
+
+// Continue and Break
+console.log('--- ONLY STRINGS ---')
+for (let i = 0; i < dougArray.length; i++) {
+    if (typeof dougArray[i] !== 'string') continue;
+
+    console.log(dougArray[i], typeof dougArray[i]);
+}
+
+console.log('--- BREAK WITH NUMBER ---')
+for (let i = 0; i < dougArray.length; i++) {
+    if (typeof dougArray[i] === 'number') break;
+
+    console.log(dougArray[i], typeof dougArray[i]);
+}
+
+/////////////////////////////////////
+LOOPING BACKWARDS AND LOOPS IN LOOPS
+////////////////////////////////////
+const dougArray = [
+    'Doug',
+    'Moser',
+    2024 - 2001,
+    'IT Support Specialist',
+    ['Mike, Isaac, Aaron, Garrett']
+];
+
+for (let i = dougArray.length - 1; i >= 0; i--) {
+    console.log(i, dougArray[i]);
+}
+
+for (let exercise = 1; exercise <= 3; exercise++) {
+    console.log(`----- Starting Exercise ${exercise}.`);
+
+    for (let rep = 1; rep <= 5; rep++) {
+        console.log(`Excersice ${exercise}: Rep ${rep} 🏋️‍♂️`);
+    }
+}
+
+///////////////
+THE WHILE LOOP
+//////////////*/
+// for (let i = 1; i <= 10; i++) {
+//     console.log(`FOR: Lifting weights repetition ${i} 🏋️‍♂️.`)
+// }
+
+let rep = 1;
+
+while (rep <= 10) {
+    // console.log(`WHILE: Lifting weights repetition ${rep} 🏋️‍♂️.`);
+    rep++;
+}
+
+let dice = Math.trunc(Math.random() * 6) + 1;
+
+// while (dice !== 6) {
+//     console.log(`You rolled a ${dice}`);
+//     dice = Math.trunc(Math.random() * 6) + 1;
+//     if (dice === 6) console.log(`You rolled a ${dice}!`);
+// }
+
+// If first roll is 6 then nothing will log to console
+// Quick fix off the top of the dome
+// Doesn't work after previous while loop because dice already === 6 by the end of it.
+if (dice === 6) {
+    console.log(`You rolled a ${dice}! 🎲`);
+} else {
+    while (dice !== 6) {
+        console.log(`You rolled a ${dice}`);
+        dice = Math.trunc(Math.random() * 6) + 1;
+        if (dice === 6) console.log(`Finally! You rolled a ${dice}!`);
+    }
+}
