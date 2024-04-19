@@ -176,3 +176,39 @@ console.log('Friend:', friend);
 console.log('Me:', friend);
 // Both log age as 27 due to the way memory is stored in callstack and heap
 */
+
+// PRIMITIVES VS OBJECTS IN PRACTICE
+// Primitive types
+let lastName = 'Williams';
+let oldLastName = lastName;
+lastName = 'Davis';
+console.log(lastName, oldLastName);
+
+// Reference types
+const jessica = {
+  firstName: 'Jessica',
+  lastName: 'Williams',
+  age: 27,
+};
+const marriedJessica = jessica;
+marriedJessica.lastName = 'Davis';
+console.log('Before Marriage:', jessica);
+console.log('After Marriage:', marriedJessica);
+
+// Copying object
+const jessica2 = {
+  firstName: 'Jessica',
+  lastName: 'Williams',
+  age: 27,
+  family: ['Alice', 'Bob'],
+};
+
+const jessicaCopy = Object.assign({}, jessica2); // doesn't work on object inside of object
+jessicaCopy.lastName = 'Davis';
+console.log('Before Marriage:', jessica2);
+console.log('After Marriage:', jessicaCopy);
+
+jessicaCopy.family.push('Maria'); // family is a nested object and therefore the Object.assign doesn't work for this -- Deep cloning is possible but very difficult without external library
+jessicaCopy.family.push('John');
+console.log('Before Marriage:', jessica2);
+console.log('After Marriage:', jessicaCopy);
