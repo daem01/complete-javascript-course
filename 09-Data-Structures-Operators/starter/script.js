@@ -261,7 +261,7 @@ console.log(guests);
 
 // Nullish: null and undefined (NOT 0 or '')
 const guestsCorrect = restaurant.numGuests ?? 10;
-console.log(guestsCorrect); */
+console.log(guestsCorrect); 
 
 ////////////////////////////////
 // Logical Assignment Operators
@@ -293,4 +293,7 @@ rest1.owner &&= '<ANONYMOUS>';
 rest2.owner &&= '<ANONYMOUS>';
 
 console.log(rest1);
-console.log(rest2);
+console.log(rest2); */
+
+///////////////////////////////////
+// Looping Arrays: The FOR-OF Loop
