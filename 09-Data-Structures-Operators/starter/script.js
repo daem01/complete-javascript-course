@@ -54,7 +54,8 @@ const restaurant = {
   },
 };
 
-/* // Destructuring Arrays
+/* /////////////////////
+// Destructuring Arrays
 const arr = [2, 3, 4];
 const a = arr[0];
 const b = arr[1];
@@ -95,8 +96,8 @@ console.log(i, j, k);
 const [p = 1, q = 1, r = 1] = [8, 9];
 console.log(p, q, r); 
 
+/////////////////////////
 // Destructuring Objects
-
 const { name, openingHours, categories } = restaurant;
 console.log(name, openingHours, categories);
 
@@ -136,6 +137,7 @@ restaurant.orderDelivery({
   address: 'Via del Sole, 21',
 }); 
 
+////////////////////////
 // The Spread Operator
 const arr = [7, 8, 9];
 const badNewArr = [1, 2, arr[0], arr[1], arr[2]];
@@ -182,6 +184,7 @@ restaurantCopy.name = 'Ristorante Roma';
 console.log(restaurantCopy.name);
 console.log(restaurant.name); 
 
+///////////////////////////////
 // REST PATTERN AND PARAMETERS
 // 1) Destructuring
 
@@ -216,8 +219,9 @@ const x = [23, 5, 7];
 add(...x);
 
 restaurant.orderPizza('mushrooms', 'onion', 'olives', 'spinach');
-restaurant.orderPizza('mushrooms'); */
+restaurant.orderPizza('mushrooms'); 
 
+/////////////////////////////////
 // Short Circuiting (&& and ||)
 console.log('-------- OR ---------');
 
@@ -248,4 +252,45 @@ if (restaurant.orderPizza) {
   restaurant.orderPizza('mushrooms', 'spinach');
 }
 
-restaurant.orderPizza && restaurant.orderPizza('pepperoni', 'sausage');
+restaurant.orderPizza && restaurant.orderPizza('pepperoni', 'sausage'); 
+
+// The Nullish Coalescing Operator (??)
+restaurant.numGuests = 0;
+const guests = restaurant.numGuests || 10;
+console.log(guests);
+
+// Nullish: null and undefined (NOT 0 or '')
+const guestsCorrect = restaurant.numGuests ?? 10;
+console.log(guestsCorrect); */
+
+////////////////////////////////
+// Logical Assignment Operators
+const rest1 = {
+  name: 'Capri',
+  // numGuests: 20,
+  numGuests: 0,
+};
+
+const rest2 = {
+  name: 'La Piazza',
+  owner: 'Giovanni Rossi',
+};
+
+// OR Assignment Operator
+// rest1.numGuests = rest1.numGuests || 10;
+// rest2.numGuests = rest2.numGuests || 10;
+// rest1.numGuests ||= 10;
+// rest2.numGuests ||= 10;
+
+// nullish assignment operator (null or undefined)
+rest1.numGuests ??= 10;
+rest2.numGuests ??= 10;
+
+// AND Assignment Operator
+// rest1.owner = rest1.owner && '<ANONYMOUS>';
+// rest2.owner = rest2.owner && '<ANONYMOUS>';
+rest1.owner &&= '<ANONYMOUS>';
+rest2.owner &&= '<ANONYMOUS>';
+
+console.log(rest1);
+console.log(rest2);
