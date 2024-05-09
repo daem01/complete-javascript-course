@@ -333,7 +333,7 @@ console.log(restaurant.orderRisotto?.(0, 1) ?? 'Method does not exist');
 const users = [{ name: 'Doug', email: 'hello@doug.io' }];
 
 console.log(users[0]?.name ?? 'User array empty');
-console.log(users[1]?.name ?? 'User array empty'); */
+console.log(users[1]?.name ?? 'User array empty'); 
 
 /////////////////////////////////////////////////////
 // Looping Objects: Object Keys, Values, and Entries
@@ -361,4 +361,39 @@ const entries = Object.entries(openingHours);
 // Looping through object with destructuring
 for (const [day, { open, close }] of entries) {
   console.log(`On ${day} we open at ${open} and close at ${close}`);
-}
+} */
+
+/////////////////////////
+// SETS
+const ordersSet = new Set([
+  'Pasta',
+  'Pizza',
+  'Pizza',
+  'Risotto',
+  'Pasta',
+  'Pizza',
+]);
+console.log(ordersSet);
+
+console.log(new Set('Doug'));
+
+console.log(ordersSet.size);
+console.log(ordersSet.has('Pizza'));
+console.log(ordersSet.has('Bread'));
+ordersSet.add('Garlic Bread');
+ordersSet.add('Garlic Bread');
+ordersSet.delete('Risotto');
+console.log(ordersSet);
+
+// ordersSet.clear();
+// console.log(ordersSet);
+
+for (const order of ordersSet) console.log(order);
+
+// Example
+const staff = ['Waiter', 'Chef', 'Waiter', 'Manager', 'Chef', 'Bussboy'];
+const staffUnique = [...new Set(staff)];
+console.log(staffUnique);
+console.log(new Set(staff).size);
+
+console.log(new Set('douglasmoser').size);
