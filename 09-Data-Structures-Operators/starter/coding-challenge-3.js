@@ -34,3 +34,10 @@ for (const [key, value] of gameEvents.entries()) {
       : `[SECOND HALF] ${key}: ${value}`;
   console.log(event);
 }
+
+// Schmedtmann's Answer
+console.log(`\n Schmedtmann's Answer`);
+for (const [key, value] of gameEvents) {
+  const half = key <= 45 ? 'FIRST' : 'SECOND';
+  console.log(`[${half} HALF] ${key}: ${value}`);
+}
