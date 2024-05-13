@@ -59,3 +59,6 @@ const newPassport = function (person) {
 
 newPassport(doug);
 checkIn(flight, doug); */
+
+//////////////////////////////////////////
+// Functions Accepting Callback Functions
