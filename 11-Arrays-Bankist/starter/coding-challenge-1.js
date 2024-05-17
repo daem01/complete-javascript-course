@@ -12,15 +12,18 @@ const checkDogs = function (dogsJulia, dogsKate) {
   const dogsJuliaCopy = dogsJulia.slice(1, -1);
   const dogsAll = dogsJuliaCopy.concat(dogsKate);
 
-  dogsAll.forEach(function (dog, i) {
+  dogsAll.forEach(function (dogAge, i) {
     console.log(
       `Dog number ${i + 1} is ${
-        dog <= 3 ? 'still a puppy 🐶' : `an adult, and is ${dog} years old`
+        dogAge <= 3
+          ? 'still a puppy 🐶'
+          : `an adult, and is ${dogAge} years old`
       }`
     );
   });
 };
 
+console.log(`----- Data Set 1 -----`);
 checkDogs(dataJulia, dataKate);
 console.log(`----- Data Set 2 -----`);
 checkDogs(dataJulia2, dataKate2);
