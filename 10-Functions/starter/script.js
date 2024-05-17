@@ -213,4 +213,92 @@ const addTaxRate = function (rate) {
 
 const addVAT2 = addTaxRate(0.23);
 console.log(addVAT2(100));
-console.log(addVAT2(23)); */
+console.log(addVAT2(23)); 
+
+///////////////////////////////////////////////////
+// Immediatley Invoked Function Expressions (IIFE)
+const runOnce = function () {
+  console.log('This will never run again');
+};
+runOnce();
+
+// IIFE
+(function () {
+  console.log('This will never run again');
+  const isPrivate = 23;
+})();
+
+// console.log(isPrivate);
+
+(() => console.log('This will ALSO never run again'))();
+
+// To create private scope but you can just use IIFE anyways
+{
+  const isPrivate = 23;
+  var notPrivate = 46;
+}
+// console.log(isPrivate);
+console.log(notPrivate); 
+
+///////////////////
+// Closures
+const secureBooking = function () {
+  let passengerCount = 0;
+
+  return function () {
+    passengerCount++;
+    console.log(`${passengerCount} passengers`);
+  };
+};
+
+const booker = secureBooking(); // Returns function so that booker is equal to that function
+
+booker(); // 1 passengers
+booker(); // 2 passengers
+booker(); // 3 passengers
+// returned function still has access to the secure booking scoped variables
+// a closure makes a function remember all the variables that existed at the functions 'birthplace'
+
+console.dir(booker); 
+
+/////////////////////////
+// More Closure Examples
+// Example 1
+let f;
+
+const g = function () {
+  const a = 23;
+  f = function () {
+    console.log(a * 2);
+  };
+};
+
+const h = function () {
+  const b = 777;
+  f = function () {
+    console.log(b * 2);
+  };
+};
+
+g();
+f();
+
+// Re-assigning f function
+h();
+f();
+console.dir(f);
+
+// Example 2
+const boardPassengers = function (n, wait) {
+  const perGroup = n / 3;
+
+  setTimeout(function () {
+    console.log(`We are now boarding all ${n} passengers`);
+    console.log(`There are 3 groups, each with ${perGroup} passengers`);
+  }, wait * 1000);
+
+  console.log(`Will start boarding in ${wait} seconds`);
+};
+
+const perGroup = 1000; // To prove that closure has priority over scope chain; comment out perGroup in timeout function
+boardPassengers(180, 3); */
