@@ -41,6 +41,12 @@ poll.displayResults = type => {
   Python: ${type[1]}
   Rust: ${type[2]}
   C++: ${type[3]}`);
+
+  alert(`Results...
+  Javascript: ${type[0]}
+  Python: ${type[1]}
+  Rust: ${type[2]}
+  C++: ${type[3]}`);
 };
 
 document
