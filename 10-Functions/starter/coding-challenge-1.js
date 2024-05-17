@@ -1,3 +1,5 @@
+'use strict';
+
 const poll = {
   question: 'What is your favourite programming language?',
   options: ['A: JavaScript', 'B: Python', 'C: Rust', 'D: C++'],
