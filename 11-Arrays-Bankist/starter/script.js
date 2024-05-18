@@ -83,6 +83,20 @@ const displayMovements = function (movements) {
 };
 displayMovements(account1.movements);
 
+// Computing Usernames
+const createUsername = function (accounts) {
+  accounts.forEach(function (account) {
+    account.username = account.owner
+      .toLowerCase()
+      .split(' ')
+      .map(name => name[0])
+      .join('');
+  });
+};
+
+createUsername(accounts);
+console.log(accounts);
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -191,4 +205,58 @@ console.log(currenciesUnique);
 currenciesUnique.forEach(function (value, _, map) {
   // underscore can be used as universal throw away character
   console.log(`${value}: ${value}`); // key is exactly the same as value for sets
-}); */
+}); 
+
+/////////////////////////////////////////////
+// Data Transformations: Map, Filter, Reduce
+// The Map Method
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+const euroToUSD = 1.1;
+
+// const movementsUSD = movements.map(function (mov) {
+//   // Returns new array
+//   return mov * euroToUSD;
+// });
+console.log(movements);
+// console.log(movementsUSD);
+
+// Mini Challenge -- make map() method with arrow function
+const movementsUSDArrow = movements.map(mov => mov * euroToUSD);
+console.log(movementsUSDArrow);
+
+// vs
+
+const movementsUSDfor = [];
+for (const mov of movements) movementsUSDfor.push(mov * euroToUSD);
+console.log(movementsUSDfor);
+
+const movementsDescriptions = movements.map(
+  (mov, i) =>
+    `Movement ${i + 1}: You ${mov > 0 ? 'deposited' : 'withdrew'} ${Math.abs(
+      mov
+    )}`
+);
+
+console.log(movementsDescriptions); 
+
+// The Filter Method
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+const deposits = movements.filter(function (mov, i, arr) {
+  return mov > 0; // trick is to return a boolean value
+});
+console.log(movements);
+console.log(deposits);
+
+// vs
+
+const depositsFor = [];
+for (const mov of movements) if (mov > 0) depositsFor.push(mov);
+console.log(depositsFor);
+
+// Mini Challenge -- create array for withdrawals
+const withdrawals = movements.filter(mov => mov < 0);
+console.log(withdrawals); */
+
+/////////////////////
+// The Reduce Method
