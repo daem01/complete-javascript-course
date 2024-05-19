@@ -95,7 +95,15 @@ const createUsername = function (accounts) {
 };
 
 createUsername(accounts);
-console.log(accounts);
+// console.log(accounts);
+
+// Reduce Method Continued
+const calcDisplayBalance = function (movements) {
+  const balance = movements.reduce((acc, mov) => acc + mov, 0);
+
+  labelBalance.textContent = `${balance} EUR`;
+};
+calcDisplayBalance(account1.movements);
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
@@ -260,3 +268,31 @@ console.log(withdrawals); */
 
 /////////////////////
 // The Reduce Method
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+console.log(movements);
+
+//  accumulator --> SNOWBALL
+// const balance = movements.reduce(function(accumulator, value, i, arr) {
+//   console.log(`Iteration ${i}: ${accumulator}`);
+//   return accumulator + value;
+// }, 100); // this argument defines what accumulator starts at -- first iteration === 100
+
+const balance = movements.reduce(
+  (accumulator, value, i, arr) => accumulator + value,
+  100
+);
+console.log(balance);
+
+// vs
+
+let balance2 = 0;
+for (const mov of movements) balance2 += mov;
+console.log(balance2);
+
+// Maximum value
+const max = movements.reduce(
+  (acc, mov) => (acc > mov ? acc : mov),
+  movements[0]
+);
+console.log(max);
