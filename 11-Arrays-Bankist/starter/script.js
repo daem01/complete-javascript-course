@@ -101,9 +101,36 @@ createUsername(accounts);
 const calcDisplayBalance = function (movements) {
   const balance = movements.reduce((acc, mov) => acc + mov, 0);
 
-  labelBalance.textContent = `${balance} EUR`;
+  labelBalance.textContent = `${balance} €`;
 };
 calcDisplayBalance(account1.movements);
+
+// The Magic of Chaining Methods Continued
+const calcDisplaySummary = function (movements) {
+  const incomes = movements
+    .filter(mov => mov > 0)
+    .reduce((acc, mov) => acc + mov, 0);
+
+  labelSumIn.textContent = `${incomes} €`;
+
+  const out = movements
+    .filter(mov => mov < 0)
+    .reduce((acc, mov) => acc + mov, 0);
+
+  labelSumOut.textContent = `${Math.abs(out)} €`;
+
+  const interest = movements
+    .filter(mov => mov > 0)
+    .map(deposit => (deposit * 1.2) / 100)
+    .filter((int, i, arr) => {
+      console.log(arr);
+      return int >= 1;
+    })
+    .reduce((acc, interest) => acc + interest, 0);
+
+  labelSumInterest.textContent = `${interest} €`;
+};
+calcDisplaySummary(account1.movements);
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
@@ -264,7 +291,7 @@ console.log(depositsFor);
 
 // Mini Challenge -- create array for withdrawals
 const withdrawals = movements.filter(mov => mov < 0);
-console.log(withdrawals); */
+console.log(withdrawals); 
 
 /////////////////////
 // The Reduce Method
@@ -295,4 +322,26 @@ const max = movements.reduce(
   (acc, mov) => (acc > mov ? acc : mov),
   movements[0]
 );
-console.log(max);
+console.log(max); 
+
+/////////////////////////////////
+// The Magic of Chaining Methods
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+console.log(movements);
+
+// PIPELINE
+const euroToUSD = 1.1;
+const totalDepositsUSD = movements
+  .filter(mov => mov > 0)
+  .map(mov => mov * euroToUSD)
+  // how to inspect current array during any stage of pipline
+  // .map((mov, i, arr) => {
+  //   console.log(arr);
+  //   return mov * euroToUSD;
+  // })
+  .reduce((acc, mov) => acc + mov, 0);
+
+console.log(totalDepositsUSD); */
+
+///////////////////
+// The FIND Method
