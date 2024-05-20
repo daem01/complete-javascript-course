@@ -123,7 +123,7 @@ const calcDisplaySummary = function (movements) {
     .filter(mov => mov > 0)
     .map(deposit => (deposit * 1.2) / 100)
     .filter((int, i, arr) => {
-      console.log(arr);
+      // console.log(arr);
       return int >= 1;
     })
     .reduce((acc, interest) => acc + interest, 0);
@@ -131,6 +131,8 @@ const calcDisplaySummary = function (movements) {
   labelSumInterest.textContent = `${interest} €`;
 };
 calcDisplaySummary(account1.movements);
+
+// Implementing Login
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
@@ -142,7 +144,7 @@ calcDisplaySummary(account1.movements);
 //   ['GBP', 'Pound sterling'],
 // ]);
 
-// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /*
 /////////////////////////////////////////////////
@@ -345,3 +347,17 @@ console.log(totalDepositsUSD); */
 
 ///////////////////
 // The FIND Method
+const firstWithdrawal = movements.find(mov => mov < 0); // reutrns boolean like filter method
+console.log(movements);
+console.log(firstWithdrawal); // only returns first occurrence, and not array
+
+console.log(accounts);
+
+const account = accounts.find(acc => acc.owner === 'Jessica Davis');
+console.log(account);
+
+// vs
+
+for (const acc of accounts) {
+  if (acc.owner === 'Jessica Davis') console.log(account);
+}
