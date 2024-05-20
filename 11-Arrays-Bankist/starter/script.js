@@ -358,6 +358,8 @@ console.log(account);
 
 // vs
 
+let accountOf;
 for (const acc of accounts) {
-  if (acc.owner === 'Jessica Davis') console.log(account);
+  if (acc.owner === 'Jessica Davis') accountOf = acc;
 }
+console.log(accountOf);
