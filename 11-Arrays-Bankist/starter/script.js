@@ -196,7 +196,8 @@ btnTransfer.addEventListener('click', function (e) {
 });
 
 /////////////////////////////////////////
-// The findIndex Method // Close Account
+// The findIndex Method
+// Close Account
 btnClose.addEventListener('click', function (e) {
   e.preventDefault();
 
@@ -222,6 +223,22 @@ btnClose.addEventListener('click', function (e) {
 
 //////////////////
 // Some and Every
+btnLoan.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  const amount = Number(inputLoanAmount.value);
+
+  if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
+    // Add movement
+    currentAccount.movements.push(amount);
+
+    // Update UI
+    updateUI(currentAccount);
+
+    // Clear input field
+    inputLoanAmount.value = '';
+  }
+});
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
@@ -451,4 +468,59 @@ let accountOf;
 for (const acc of accounts) {
   if (acc.owner === 'Jessica Davis') accountOf = acc;
 }
-console.log(accountOf); */
+console.log(accountOf); 
+
+//////////////////
+// Some and Every
+console.log(movements);
+
+// EQUALITY
+console.log(movements.includes(-130));
+
+// SOME: CONDITION
+console.log(movements.some(mov => mov === -130));
+
+const anyDeposits = movements.some(mov => mov > 0); // a better name for method would be .any() and thats a good way to think about it
+console.log(anyDeposits);
+
+// EVERY
+console.log(movements.every(mov => mov > 0));
+console.log(
+  account4.movements,
+  account4.movements.every(mov => mov > 0)
+);
+
+// Separate callback
+const deposit = mov => mov > 0;
+console.log(movements.some(deposit));
+console.log(movements.every(deposit));
+console.log(movements.filter(deposit)); */
+
+// Flat and Flatmap
+const arr = [[1, 2, 3], [4, 5, 6], 7, 8];
+console.log(arr.flat());
+
+const arrDeep = [[[1, 2], 3], [4, [5, 6]], 7, 8];
+console.log(arrDeep.flat(2));
+
+// const accountMovements = accounts.map(acc => acc.movements);
+// console.log(accountMovements);
+// const allMovements = accountMovements.flat();
+// console.log(allMovements);
+// const overallBalance = allMovements.reduce((acc, mov) => acc + mov, 0);
+// console.log(overallBalance);
+
+// flat
+const overallBalanceChained = accounts
+  .map(acc => acc.movements)
+  .flat()
+  .reduce((acc, mov) => acc + mov, 0);
+console.log(overallBalanceChained);
+
+// flatmap
+const overallBalanceChained2 = accounts
+  .flatMap(acc => acc.movements) // only goes one level deep, if you need to go deeper than use flat()
+  .reduce((acc, mov) => acc + mov, 0);
+console.log(overallBalanceChained);
+
+// Sorting Arrays
