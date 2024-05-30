@@ -63,10 +63,12 @@ const inputClosePin = document.querySelector('.form__input--pin');
 
 /////////////////////////
 // Creating DOM Elements
-const displayMovements = function (movements) {
+const displayMovements = function (movements, sort = false) {
   containerMovements.innerHTML = '';
 
-  movements.forEach(function (mov, i) {
+  const movs = sort ? movements.slice().sort((a, b) => b - a) : movements;
+
+  movs.forEach(function (mov, i) {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
 
     const html = `
@@ -238,6 +240,14 @@ btnLoan.addEventListener('click', function (e) {
     // Clear input field
     inputLoanAmount.value = '';
   }
+});
+
+let sorted = false;
+btnSort.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  displayMovements(currentAccount.movements, !sorted);
+  sorted = !sorted;
 });
 
 /////////////////////////////////////////////////
@@ -494,7 +504,7 @@ console.log(
 const deposit = mov => mov > 0;
 console.log(movements.some(deposit));
 console.log(movements.every(deposit));
-console.log(movements.filter(deposit)); */
+console.log(movements.filter(deposit)); 
 
 // Flat and Flatmap
 const arr = [[1, 2, 3], [4, 5, 6], 7, 8];
@@ -521,6 +531,36 @@ console.log(overallBalanceChained);
 const overallBalanceChained2 = accounts
   .flatMap(acc => acc.movements) // only goes one level deep, if you need to go deeper than use flat()
   .reduce((acc, mov) => acc + mov, 0);
-console.log(overallBalanceChained);
+console.log(overallBalanceChained); 
 
 // Sorting Arrays
+// strings
+const owners = ['Doug', 'Zach', 'Adam', 'Martha'];
+console.log(owners.sort()); // Mutates original array
+console.log(owners);
+
+// numbers
+console.log(movements);
+// console.log(movements.sort()); // sorts based on strings
+
+// return < 0, A, B (keep order)
+// return > 0, B, A (switch order)
+
+// Ascending
+// movements.sort((a, b) => {
+//   if (a > b) return 1;
+//   if (a < b) return -1;
+// }); // a and b === any 2 consecutive numbers in array
+movements.sort((a, b) => a - b);
+console.log(movements);
+
+// Descending
+// movements.sort((a, b) => {
+//   if (a > b) return -1;
+//   if (a < b) return 1;
+// });
+movements.sort((a, b) => b - a);
+console.log(movements); */
+
+////////////////////////////////////////////
+// More Ways of Creating and Filling Arrays
