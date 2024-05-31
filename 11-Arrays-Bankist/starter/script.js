@@ -599,7 +599,5 @@ labelBalance.addEventListener('click', function () {
 
   console.log(movementsUI);
 
-  const movementsUI2 = [...document.querySelectorAll('.movements__value')];
-}); */
-
-// Array Methods Practice
+  // const movementsUI2 = [...document.querySelectorAll('.movements__value')];
+});
