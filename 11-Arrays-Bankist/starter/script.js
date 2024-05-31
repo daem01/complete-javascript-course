@@ -560,7 +560,7 @@ console.log(movements);
 //   if (a < b) return 1;
 // });
 movements.sort((a, b) => b - a);
-console.log(movements); */
+console.log(movements); 
 
 ////////////////////////////////////////////
 // More Ways of Creating and Filling Arrays
@@ -585,7 +585,7 @@ console.log(y);
 
 const z = Array.from(
   { length: 7 },
-  (currentValue /* _ */, currentIndex) => currentIndex + 1
+  (currentValue /* _ , currentIndex) => currentIndex + 1
 );
 console.log(z);
 
@@ -600,4 +600,6 @@ labelBalance.addEventListener('click', function () {
   console.log(movementsUI);
 
   const movementsUI2 = [...document.querySelectorAll('.movements__value')];
-});
+}); */
+
+// Array Methods Practice
