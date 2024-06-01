@@ -22,6 +22,10 @@ the recommended food portion and add it to the object as a new property. Do
 not create a new array, simply loop over the array. Forumla:
 recommendedFood = weight ** 0.75 * 28. (The result is in grams of
 food, and the weight needs to be in kg)
+
+2. Find Sarah's dog and log to the console whether it's eating too much or too
+little. Hint: Some dogs have multiple owners, so you first need to find Sarah in
+the owners array, and so this one is a bit tricky (on purpose) 🤓
 */
 
 dogs.forEach(dog => {
@@ -35,16 +39,32 @@ dogs.forEach(dog => {
 });
 
 /*
-2. Find Sarah's dog and log to the console whether it's eating too much or too
-little. Hint: Some dogs have multiple owners, so you first need to find Sarah in
-the owners array, and so this one is a bit tricky (on purpose) 🤓
-*/
-
-/*
 3. Create an array containing all owners of dogs who eat too much
 ('ownersEatTooMuch') and an array with all owners of dogs who eat too little
 ('ownersEatTooLittle').
 */
+
+const { ownersEatTooMuch, ownersEatTooLittle } = dogs
+  .map(arr => arr.curFood)
+  // .filter(curFood => {
+  //   if (curFood[0] > curFood[1] ** 0.75 * 28) return curFood[0];
+  // });
+  .reduce(
+    (dog, cur) => {
+      dog[cur > dog ? 'ownersEatTooMuch' : 'ownersEatTooLittle'] += cur;
+
+      return dog;
+    },
+    { ownersEatTooMuch: 0, ownersEatTooLittle: 0 }
+  );
+
+console.log(ownersEatTooMuch);
+
+// const ownersEatTooLittle = dogs
+//   .map(arr => [arr.curFood, arr.weight])
+//   .filter(dog => dog[0] < dog[1] ** 0.75 * 28);
+
+// console.log(...ownersEatTooLittle);
 
 /*
 4. Log a string to the console for each array created in 3., like this: "Matilda and
