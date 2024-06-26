@@ -323,6 +323,105 @@ console.log('floor', Math.floor(-23.3));
 console.log((2.7).toFixed(0));
 console.log((2.7).toFixed(3));
 console.log(+(2.345).toFixed(2));
-*/
+
 
 // MOD
+const isEven = n => n % 2 === 0;
+console.log(isEven(8));
+console.log(isEven(23));
+console.log(isEven(96));
+
+labelBalance.addEventListener('click', function () {
+  [...document.querySelectorAll('.movements__row')].forEach((row, i) => {
+    if (i % 2 === 0) row.style.backgroundColor = 'lightgray';
+    if (i % 3 === 0) row.style.backgroundColor = 'skyblue';
+  });
+});
+
+//////////////////////
+// Numeric Separators
+// 287,460,000,000
+const diameter = 287_460_000_000;
+console.log(diameter);
+
+const price = 34_599;
+console.log(price);
+
+const transferFee = 1_500;
+
+let PI = 3.1_4_1_5;
+console.log(PI);
+// PI = _3.1_4_1_5;
+// PI = 3._1_4_1_5;
+
+console.log(Number('230_000')); // doesn't work when converting from string
+console.log(parseInt('230_000')); // only get 230
+
+//////////////////////
+// Working with BigInt
+console.log(2 ** 53 - 1);
+console.log(Number.MAX_SAFE_INTEGER);
+console.log(2 ** 53 + 1);
+
+console.log(4293874928749283749287492837489237n);
+console.log(BigInt(42938749287492));
+
+// Operations
+console.log(10000n + 10000n);
+console.log(2398479283749823748937n * 2903480293480928490238n);
+// console.log(Math.sqrt(16n)); // throws error
+
+const huge = 293847928347928392874742n;
+const num = 23;
+console.log(huge * BigInt(num)); // throws error without BigInt
+
+// Exceptions
+console.log(20n > 15);
+console.log(20n === 20);
+console.log(typeof 20n);
+console.log(20n == '20');
+
+console.log(huge + ' is REALLY big!!!');
+
+// Divisions
+console.log(11n / 3n); // truncates the answer due to int
+console.log(11 / 3);
+*/
+//////////////////
+// Creating Dates
+
+// Create a date
+/*
+const now = new Date();
+console.log(now);
+
+console.log(new Date('Tue Jun 25 2024'));
+console.log(new Date('Decemeber 24, 2015'));
+
+console.log(new Date(account1.movementsDates[0]));
+
+console.log(new Date(2037, 10, 19, 15, 23, 5));
+console.log(new Date(2037, 10, 31));
+
+console.log(new Date(0));
+console.log(new Date(2 * 24 * 60 * 60 * 1000));
+*/
+
+// Working with Dates
+const future = new Date(2037, 10, 19, 15, 23);
+console.log(future);
+console.log(future.getFullYear());
+console.log(future.getMonth()); // 0 based so 10 is 11
+console.log(future.getDay());
+console.log(future.getHours());
+console.log(future.getMinutes());
+console.log(future.getSeconds());
+console.log(future.toISOString());
+console.log(future.getTime()); // milliseconds
+
+console.log(new Date(2142278580000));
+
+console.log(Date.now()); // timestamp
+
+future.setFullYear(2040);
+console.log(future);
