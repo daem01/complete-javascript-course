@@ -186,14 +186,44 @@ const updateUI = function (acc) {
   calcDisplaySummary(acc);
 };
 
+const startLogoutTimer = () => {
+  const tick = () => {
+    const min = String(Math.trunc(time / 60)).padStart(2, 0);
+    const sec = String(time % 60).padStart(2, 0);
+
+    // In each call, print the remaining time to UI
+    labelTimer.textContent = `${min}:${sec}`;
+
+    // When time = 0, stop timer and logout user
+    if (time === 0) {
+      clearInterval(timer);
+
+      labelWelcome.textContent = `Log in to get started`;
+      containerApp.style.opacity = 0;
+    }
+
+    // Decrease 1s
+    time--;
+  };
+
+  // Set the time to 5 minutes
+  let time = 60 * 5;
+
+  // Call the timer every second
+  tick();
+  const timer = setInterval(tick, 1000);
+
+  return timer;
+};
+
 ///////////////////////////////////////
 // Event handlers
-let currentAccount;
+let currentAccount, timer;
 
 // FAKE ALWAYS LOGGED IN
-currentAccount = account1;
-updateUI(currentAccount);
-containerApp.style.opacity = 100;
+// currentAccount = account1;
+// updateUI(currentAccount);
+// containerApp.style.opacity = 100;
 
 btnLogin.addEventListener('click', function (e) {
   // Prevent form from submitting
@@ -242,6 +272,9 @@ btnLogin.addEventListener('click', function (e) {
     inputLoginUsername.value = inputLoginPin.value = '';
     inputLoginPin.blur();
 
+    if (timer) clearInterval(timer);
+    timer = startLogoutTimer();
+
     // Update UI
     updateUI(currentAccount);
   }
@@ -271,6 +304,10 @@ btnTransfer.addEventListener('click', function (e) {
 
     // Update UI
     updateUI(currentAccount);
+
+    // Reset timer
+    clearInterval(timer);
+    timer = startLogoutTimer();
   }
 });
 
@@ -292,6 +329,10 @@ btnLoan.addEventListener('click', function (e) {
     }, 2500);
   }
   inputLoanAmount.value = '';
+
+  // Reset timer
+  clearInterval(timer);
+  timer = startLogoutTimer();
 });
 
 btnClose.addEventListener('click', function (e) {
@@ -553,3 +594,12 @@ if (ingredients.includes('spinach')) clearTimeout(pizzaTimer);
 // }, 1000);
 
 // Challenge: print clock with just hours minutes and seconds
+// setInterval(() => {
+//   const now = new Date();
+//   console.log(
+//     `${`${now.getHours()}`.padStart(2, 0)}:${`${now.getMinutes()}`.padStart(
+//       2,
+//       0
+//     )}:${`${now.getSeconds()}`.padStart(2, 0)}`
+//   );
+// }, 1000);
