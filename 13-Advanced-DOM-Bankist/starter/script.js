@@ -212,3 +212,34 @@ document.querySelector('.nav').addEventListener(
 
 ////////////////////////////////////////////////*/
 // Event Delegation: Implementing Page Navigation
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
+
+btnScrollTo.addEventListener('click', function () {
+  section1.scrollIntoView({ behavior: 'smooth' });
+});
+
+// document.querySelectorAll('.nav__link').forEach(link =>
+//   link.addEventListener('click', function (e) {
+//     e.preventDefault();
+
+//     const id = this.getAttribute('href');
+//     document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
+//   })
+// );
+
+// 1. Add event listener to common parent element
+// 2. Determine what element originated the event
+
+document.querySelector('.nav__links').addEventListener('click', function (e) {
+  // Matching strategy
+  if (e.target.classList.contains('nav__link')) {
+    e.preventDefault();
+
+    const id = e.target.getAttribute('href');
+    document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
+  }
+});
+
+///////////////////
+// DOM Traversing
