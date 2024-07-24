@@ -341,7 +341,7 @@ window.addEventListener('scroll', function (e) {
   else nav.classList.remove('sticky');
 });
 
-/////////////////////////////////
+///////////////////////////////*/
 // The Intersection Observer API
 // const obsCallback = function (entries, observer) {
 //   entries.forEach(entry => console.log(entry));
@@ -357,7 +357,7 @@ window.addEventListener('scroll', function (e) {
 
 const header = document.querySelector('.header');
 const navHeight = nav.getBoundingClientRect().height;
-console.log(navHeight);
+// console.log(navHeight);
 
 const stickyNav = function (entries) {
   const [entry] = entries;
@@ -374,5 +374,31 @@ const headerObserver = new IntersectionObserver(stickyNav, {
 });
 headerObserver.observe(header);
 
-//////////////////////////////*/
+////////////////////////////////
 // Revealing Elements on Scroll
+// Reveal secitons
+const allSections = document.querySelectorAll('.section');
+
+const revealSection = function (entries, observer) {
+  const [entry] = entries;
+  console.log(entry);
+
+  if (!entry.isIntersecting) return;
+
+  entry.target.classList.remove('section--hidden');
+
+  observer.unobserve(entry.target);
+};
+
+const sectionObserver = new IntersectionObserver(revealSection, {
+  root: null,
+  threshold: 0.15,
+});
+
+allSections.forEach(section => {
+  sectionObserver.observe(section);
+  section.classList.add('section--hidden');
+});
+
+///////////////////////
+// Lazy Loading Images
