@@ -376,29 +376,29 @@ headerObserver.observe(header);
 
 ////////////////////////////////
 // Revealing Elements on Scroll
-// Reveal secitons
-const allSections = document.querySelectorAll('.section');
+// Reveal sections
+// const allSections = document.querySelectorAll('.section');
 
-const revealSection = function (entries, observer) {
-  const [entry] = entries;
-  // console.log(entry);
+// const revealSection = function (entries, observer) {
+//   const [entry] = entries;
+//   // console.log(entry);
 
-  if (!entry.isIntersecting) return;
+//   if (!entry.isIntersecting) return;
 
-  entry.target.classList.remove('section--hidden');
+//   entry.target.classList.remove('section--hidden');
 
-  observer.unobserve(entry.target);
-};
+//   observer.unobserve(entry.target);
+// };
 
-const sectionObserver = new IntersectionObserver(revealSection, {
-  root: null,
-  threshold: 0.15,
-});
+// const sectionObserver = new IntersectionObserver(revealSection, {
+//   root: null,
+//   threshold: 0.15,
+// });
 
-allSections.forEach(section => {
-  sectionObserver.observe(section);
-  section.classList.add('section--hidden');
-});
+// allSections.forEach(section => {
+//   sectionObserver.observe(section);
+//   section.classList.add('section--hidden');
+// });
 
 ///////////////////////
 // Lazy Loading Images
@@ -430,3 +430,46 @@ imgTargets.forEach(img => imgObserver.observe(img));
 
 ///////////////////////////////////////
 // Building a Slider Component: Part 1
+const slides = document.querySelectorAll('.slide');
+const btnLeft = document.querySelector('.slider__btn--left');
+const btnRight = document.querySelector('.slider__btn--right');
+
+let currentSlide = 0;
+const maxSlide = slides.length - 1;
+
+// const slider = document.querySelector('.slider');
+// slider.style.overflow = 'visible';
+
+const goToSlide = function (slide) {
+  slides.forEach(
+    (s, index) => (s.style.transform = `translateX(${100 * (index - slide)}%)`)
+  );
+};
+goToSlide(0);
+
+// Next slide
+const nextSlide = function () {
+  if (currentSlide === maxSlide) {
+    currentSlide = 0;
+  } else {
+    currentSlide++;
+  }
+
+  goToSlide(currentSlide);
+  // currentSlide = 1: -100%, 0%, 100%, 200%
+};
+
+const previousSlide = function () {
+  if (currentSlide === 0) {
+    currentSlide = maxSlide;
+  } else {
+    currentSlide--;
+  }
+
+  goToSlide(currentSlide);
+};
+
+btnRight.addEventListener('click', nextSlide);
+btnLeft.addEventListener('click', previousSlide);
+
+// Building a Slider Component: Part 2
