@@ -430,46 +430,95 @@ imgTargets.forEach(img => imgObserver.observe(img));
 
 ///////////////////////////////////////
 // Building a Slider Component: Part 1
-const slides = document.querySelectorAll('.slide');
-const btnLeft = document.querySelector('.slider__btn--left');
-const btnRight = document.querySelector('.slider__btn--right');
+const slider = function () {
+  const slides = document.querySelectorAll('.slide');
+  const btnLeft = document.querySelector('.slider__btn--left');
+  const btnRight = document.querySelector('.slider__btn--right');
 
-let currentSlide = 0;
-const maxSlide = slides.length - 1;
+  let currentSlide = 0;
+  const maxSlide = slides.length - 1;
 
-// const slider = document.querySelector('.slider');
-// slider.style.overflow = 'visible';
+  // const slider = document.querySelector('.slider');
+  // slider.style.overflow = 'visible';
 
-const goToSlide = function (slide) {
-  slides.forEach(
-    (s, index) => (s.style.transform = `translateX(${100 * (index - slide)}%)`)
-  );
+  const goToSlide = function (slide) {
+    slides.forEach(
+      (s, index) =>
+        (s.style.transform = `translateX(${100 * (index - slide)}%)`)
+    );
+  };
+
+  // Next slide
+  const nextSlide = function () {
+    if (currentSlide === maxSlide) {
+      currentSlide = 0;
+    } else {
+      currentSlide++;
+    }
+
+    goToSlide(currentSlide);
+    activateDot(currentSlide);
+    // currentSlide = 1: -100%, 0%, 100%, 200%
+  };
+
+  const previousSlide = function () {
+    if (currentSlide === 0) {
+      currentSlide = maxSlide;
+    } else {
+      currentSlide--;
+    }
+
+    goToSlide(currentSlide);
+    activateDot(currentSlide);
+  };
+
+  btnRight.addEventListener('click', nextSlide);
+  btnLeft.addEventListener('click', previousSlide);
+
+  // Building a Slider Component: Part 2
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowLeft') previousSlide();
+    // or you can use short circuiting
+    e.key === 'ArrowRight' && nextSlide();
+  });
+
+  const dotContainer = document.querySelector('.dots');
+
+  const createDots = function () {
+    slides.forEach((_, i) => {
+      dotContainer.insertAdjacentHTML(
+        'beforeend',
+        `<button class="dots__dot" data-slide="${i}"></button>`
+      );
+    });
+  };
+
+  const activateDot = function (slide) {
+    document
+      .querySelectorAll('.dots__dot')
+      .forEach(dot => dot.classList.remove('dots__dot--active'));
+
+    document
+      .querySelector(`.dots__dot[data-slide="${slide}"]`)
+      .classList.add('dots__dot--active');
+  };
+
+  dotContainer.addEventListener('click', function (e) {
+    if (e.target.classList.contains('dots__dot')) {
+      const { slide } = e.target.dataset;
+      goToSlide(slide);
+      activateDot(slide);
+    }
+  });
+
+  const init = function () {
+    goToSlide(0);
+    createDots();
+    activateDot(0);
+  };
+  init();
 };
-goToSlide(0);
+slider();
 
-// Next slide
-const nextSlide = function () {
-  if (currentSlide === maxSlide) {
-    currentSlide = 0;
-  } else {
-    currentSlide++;
-  }
-
-  goToSlide(currentSlide);
-  // currentSlide = 1: -100%, 0%, 100%, 200%
-};
-
-const previousSlide = function () {
-  if (currentSlide === 0) {
-    currentSlide = maxSlide;
-  } else {
-    currentSlide--;
-  }
-
-  goToSlide(currentSlide);
-};
-
-btnRight.addEventListener('click', nextSlide);
-btnLeft.addEventListener('click', previousSlide);
-
-// Building a Slider Component: Part 2
+////////////////////////
+// Lifecycle DOM Events
