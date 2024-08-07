@@ -32,3 +32,26 @@ console.log(jay instanceof Person);
 
 //////////////////////////////////////////////
 // Prototypes
+console.log(Person.prototype);
+
+// Prototypal inheritance
+Person.prototype.calcAge = function () {
+  console.log(2024 - this.birthYear);
+};
+
+doug.calcAge();
+matilda.calcAge();
+
+console.log(doug.__proto__);
+console.log(doug.__proto__ === Person.prototype); // not the prototype of Person but the prototype that all instances that are created
+
+console.log(Person.prototype.isPrototypeOf(doug));
+
+Person.prototype.species = 'Homo Sapiens';
+console.log(doug.species, matilda.species);
+
+console.log(doug.hasOwnProperty('firstName'));
+console.log(doug.hasOwnProperty('species')); // returns false because doug only has access to species through prototype not on doug object itself
+
+//////////////////////////////////////////////
+// Prototypal Inheritance and the Prototype Chain
