@@ -55,3 +55,19 @@ console.log(doug.hasOwnProperty('species')); // returns false because doug only 
 
 //////////////////////////////////////////////
 // Prototypal Inheritance and the Prototype Chain
+console.log(doug.__proto__.__proto__); // Object.prototype
+console.log(doug.__proto__.__proto__.__proto__);
+
+console.dir(Person.prototype.constructor);
+
+const arr = [3, 6, 4, 5, 6, 9, 3]; // new Array === []
+console.log(arr.__proto__);
+console.log(arr.__proto__ === Array.prototype);
+
+console.log(arr.__proto__.__proto__);
+
+Array.prototype.unique = function () {
+  return [...new Set(this)];
+};
+
+console.log(arr.unique());
