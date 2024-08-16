@@ -34,5 +34,6 @@ console.log('\n');
 
 myCar.speedEU = 120;
 myCar.brake();
+console.log(`${myCar.make} is going ${myCar.speedEU} km/h`); // 112 after brake
 myCar.speedEU = 200;
 myCar.accelerate();
