@@ -84,7 +84,7 @@ const h1 = document.querySelector('h1');
 
 console.dir(x => x + 1);
 
-////////////////////////////////////////////*/
+//////////////////////////////////////////////
 // ES6 Classes
 // classes are still a type of function
 // 1. Classes are NOT hoisted (hoisted = can be used before decalred in the code a.k.a. classes can not be used before they are declared)
@@ -241,3 +241,93 @@ console.log(mike instanceof Object);
 
 Student.prototype.constructor = Student;
 console.dir(Student.prototype.constructor);
+
+////////////////////////////////////////////*/
+// Inheritance Between "Classes": ES6 Classes
+class PersonCl {
+  constructor(fullName, birthYear) {
+    this.fullName = fullName;
+    this.birthYear = birthYear;
+  }
+
+  // Methods will be added ot .prototype property
+  calcAge() {
+    console.log(2024 - this.birthYear);
+  }
+
+  greet() {
+    console.log(`Hey ${this.fullName}!`);
+  }
+
+  // Getter/Setter Lecture
+  get age() {
+    return 2024 - this.birthYear;
+  }
+
+  // Set a property that already exists
+  set fullName(name) {
+    if (name.includes(' ')) this._fullName = name;
+    else alert(`${name} is not a full name.`);
+  }
+
+  get fullName() {
+    return this._fullName;
+  }
+
+  // Static Methods Lecture
+  static hey() {
+    console.log('Hey There Class 👋');
+    console.log(this);
+  }
+}
+
+class StudentCl extends PersonCl {
+  constructor(fullName, birthYear, program) {
+    // Always needs to happen first!
+    super(fullName, birthYear); // responsible for making "this" keyword in this class
+    this.program = program;
+  }
+
+  introduce() {
+    console.log(`My name is ${this.fullName} and I study ${this.program}`);
+  }
+
+  calcAge() {
+    console.log(
+      `I'm ${
+        2024 - this.birthYear
+      } years old, but as a student I feel more like ${
+        2024 - this.birthYear + 10
+      }.`
+    );
+  }
+
+  set program(program) {
+    this._program = program;
+
+    if (program === 'Computer Science') return;
+    else
+      console.log(
+        `${program} is not a real program ${this.fullName
+          .split(' ')
+          .shift()}! lol`
+      );
+  }
+
+  get program() {
+    return this._program;
+  }
+}
+
+const martha = new StudentCl('Martha Jones', 2002, 'Computer Science');
+martha.introduce();
+martha.calcAge();
+console.log(martha);
+
+const bob = new StudentCl('Bob Martin', 1978, 'Business');
+bob.introduce();
+const noah = new StudentCl('Tim Mueller', 1997, 'Graphic Design');
+noah.introduce();
+
+//////////////////////////////////////////////
+// Inheritance Between "Classes": Object.create
