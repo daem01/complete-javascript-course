@@ -244,7 +244,7 @@ console.dir(Student.prototype.constructor);
 
 ////////////////////////////////////////////*/
 // Inheritance Between "Classes": ES6 Classes
-class PersonCl {
+/*class PersonCl {
   constructor(fullName, birthYear) {
     this.fullName = fullName;
     this.birthYear = birthYear;
@@ -331,3 +331,204 @@ noah.introduce();
 
 //////////////////////////////////////////////
 // Inheritance Between "Classes": Object.create
+const PersonProto = {
+  calcAge() {
+    console.log(2024 - this.birthYear);
+  },
+
+  init(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  },
+};
+
+const steven = Object.create(PersonProto);
+
+const StudentProto = Object.create(PersonProto);
+StudentProto.init = function(firstName, birthYear, course) {
+  PersonProto.init.call(this, firstName, birthYear);
+  this.course = course;
+};
+
+StudentProto.introduce = function() {
+    console.log(`My name is ${this.firstName} and I study ${this.course}`);
+}
+
+const jay = Object.create(StudentProto);
+jay.init('Jay', 2002, 'Computer Science');
+jay.introduce();
+jay.calcAge();
+
+//////////////////////////////////////////////
+// Another Class Example
+class Account {
+  constructor(owner, currency, pin) {
+    this.owner = owner;
+    this.currency = currency;
+    this.pin = pin;
+    this.movements = [];
+    this.locale = navigator.language;
+
+    console.log(`Thanks for opening an account, ${owner}`);
+  }
+
+  // Public interface
+  deposit(val) {
+    this.movements.push(val);
+  }
+
+  withdraw(val) {
+    this.deposit(-val)
+  }
+
+  approveLoan(val) {
+    return true;
+  }
+
+  requestLoan(val) {
+    if(this.approveLoan(val)) {
+      this.deposit(val);
+      console.log(`Loan Approved`);
+    }
+  }
+}
+
+const acc1 = new Account('Doug', 'USD', 1234);
+console.log(acc1);
+
+acc1.deposit(250);
+acc1.withdraw(140);
+acc1.requestLoan(1000);
+acc1.approveLoan(1000);
+
+console.log(acc1);
+
+console.log(acc1.pin);
+
+//////////////////////////////////////////////
+// Encapsulation: Protected Properties and Methods
+class Account {
+  constructor(owner, currency, pin) {
+    this.owner = owner;
+    this.currency = currency;
+    this.pin = pin;
+    // Protected property
+    this._movements = [];
+    this.locale = navigator.language;
+
+    console.log(`Thanks for opening an account, ${owner}`);
+  }
+
+  // Public interface
+  getMovements() {
+    return this._movements;
+  }
+
+  deposit(val) {
+    this._movements.push(val);
+  }
+
+  withdraw(val) {
+    this.deposit(-val);
+  }
+
+  _approveLoan(val) {
+    return true;
+  }
+
+  requestLoan(val) {
+    if (this._approveLoan(val)) {
+      this.deposit(val);
+      console.log(`Loan Approved`);
+    }
+  }
+}
+
+const acc1 = new Account('Doug', 'USD', 1234);
+
+acc1._movements.push(250); // still accessible but should know not to call in code. Just a coding convention for developers.
+acc1.withdraw(50);
+console.log(acc1.getMovements());
+
+console.log(acc1);
+
+////////////////////////////////////////////*/
+// Encapsulation: Private Class Fields and Methods
+// Currently still a proposal, not officially a part of JS yet.
+
+// Public Fields
+// Private Fields
+// Public Methods
+// Private Methods
+// (there is also the static version)
+
+class Account {
+  // Public fields (instances)
+  locale = navigator.language;
+
+  // Private fields
+  #movements = [];
+  #pin;
+
+  constructor(owner, currency, pin) {
+    this.owner = owner;
+    this.currency = currency;
+    // Protected property
+    this.#pin = pin;
+    // this._movements = [];
+    // this.locale = navigator.language;
+
+    console.log(`Thanks for opening an account, ${owner}`);
+  }
+
+  // Public Methods are the same
+  // Public interface
+  getMovements() {
+    return this.#movements;
+  }
+
+  deposit(val) {
+    this.#movements.push(val);
+  }
+
+  withdraw(val) {
+    this.deposit(-val);
+  }
+
+  requestLoan(val) {
+    if (this.#approveLoan(val)) {
+      this.deposit(val);
+      console.log(`Loan Approved`);
+    }
+  }
+
+  static helper() {
+    console.log(`Helper`);
+  }
+
+  // Private Methods
+  #approveLoan(val) {
+    return true;
+  }
+}
+
+const acc1 = new Account('Doug', 'USD', 1234);
+
+acc1.deposit(250);
+acc1.withdraw(50);
+
+console.log(acc1);
+
+// console.log(acc1.#movements);
+console.log(acc1.getMovements());
+
+// console.log(acc1.#pin);
+// console.log(acc1.#approveLoan(150));
+acc1.requestLoan(500);
+console.log(acc1);
+
+Account.helper();
+// acc1.helper();
+
+////////////////////////////////////////////*/
+// Chaining Methods
