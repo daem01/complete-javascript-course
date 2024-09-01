@@ -10,3 +10,21 @@ const inputDistance = document.querySelector('.form__input--distance');
 const inputDuration = document.querySelector('.form__input--duration');
 const inputCadence = document.querySelector('.form__input--cadence');
 const inputElevation = document.querySelector('.form__input--elevation');
+
+//////////////////////////////////////////
+// Using the Geolocation API
+/*
+if (navigator.geolocation)
+  navigator.geolocation.getCurrentPosition(
+    function (position) {
+      const { latitude } = positions.coords;
+      const { longitude } = position.coords;
+      console.log(latitude, longitude);
+    },
+    function () {
+      alert(`Could not get your position.`);
+    }
+  );
+*/
+//////////////////////////////////////////
+// Displaying a Map Using Leaflet Library
