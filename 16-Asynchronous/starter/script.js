@@ -69,7 +69,7 @@ const renderCountry = function (data, className = '') {
         </article>`;
 
   countriesContainer.insertAdjacentHTML('beforeend', html);
-  countriesContainer.style.opacity = 1;
+  // countriesContainer.style.opacity = 1;
 };
 /*
 const getCountryAndNeighbor = function (country) {
@@ -152,7 +152,7 @@ const getCountryData = function (country) {
     .then(data => renderCountry(data[0]));
 };
 getCountryData(country);
-*/
+
 ///////////////////////////////////////////////////////
 // Chaining Promises
 const getCountryData = function (country) {
@@ -172,3 +172,43 @@ const getCountryData = function (country) {
     .then(data => renderCountry(data[0], 'neighbour'));
 };
 getCountryData('germany');
+*/
+////////////////////////////////////////////////////////
+// Handling Rejected Promises
+const renderError = function (msg) {
+  countriesContainer.insertAdjacentText('beforeend', msg);
+  // countriesContainer.style.opacity = 1;
+};
+
+const getCountryData = function (country) {
+  // Country 1
+  fetch(`https://restcountries.com/v3.1/name/${country}`)
+    .then(response => response.json())
+    .then(data => {
+      renderCountry(data[0]);
+      const neighbor = data[0].borders?.[0];
+
+      if (!neighbor) return;
+
+      // Country 2
+      return fetch(`https://restcountries.com/v3.1/alpha/${neighbor}`);
+    })
+    .then(response => response.json())
+    .then(data => renderCountry(data[0], 'neighbour'))
+    .catch(err => {
+      console.error(`${err} 😢😢😢`);
+      renderError(`Something went wrong... 😢 ${err.message}. Try again!`);
+    })
+    .finally(() => {
+      countriesContainer.style.opacity = 1;
+    });
+};
+
+btn.addEventListener('click', function () {
+  getCountryData('portugal');
+});
+
+getCountryData('lksdjflksdjf');
+
+///////////////////////////////////////////////////
+// Throwing Errors Manually
