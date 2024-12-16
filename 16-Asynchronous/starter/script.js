@@ -248,7 +248,9 @@ const getCountryData = function (country) {
     .then(data => renderCountry(data[0], 'neighbour'))
     .catch(err => {
       console.error(`${err} 😢😢😢`);
-      renderError(`Something went wrong... 😢 ${err.message}. Try again!`);
+      renderError(
+        `Uh oh... Something went wrong 😢 ${err.message} Please try again!`
+      );
     })
     .finally(() => {
       countriesContainer.style.opacity = 1;
