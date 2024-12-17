@@ -41,7 +41,7 @@ const getCountryData = function (country) {
 };
 
 const whereAmI = function (lat, lng) {
-  return fetch(
+  fetch(
     `https://api-bdc.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}`
   )
     .then(response => {

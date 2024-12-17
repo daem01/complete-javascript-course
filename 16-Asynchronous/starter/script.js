@@ -209,7 +209,7 @@ btn.addEventListener('click', function () {
 });
 
 getCountryData('lksdjflksdjf');
-*/
+
 ///////////////////////////////////////////////////
 // Throwing Errors Manually
 const getJSON = function (url, errorMsg = 'Something went wrong...') {
@@ -262,3 +262,127 @@ btn.addEventListener('click', function () {
 });
 
 getCountryData('australia');
+
+///////////////////////////////////////////////////////////
+// The Event Loop in Practice
+console.log('Test start');
+setTimeout(() => console.log('0 sec timer'), 0);
+Promise.resolve('Resolved promise 1').then(res => console.log(res));
+
+Promise.resolve('Resolved promise 2').then(res => {
+  for (let i = 0; i < 1000000000; i++) {}
+
+  console.log(res);
+});
+
+console.log('Test end');
+
+// any top level code will run first in the event loop
+// Promise logs first because promises are held in the microtask queue which takes priority over the callback queue which is where the timeout callback is held
+
+
+/////////////////////////////////////////////////////////
+// Building a Simple Promise
+const lotteryPromise = new Promise(function (resolve, reject) {
+  // executor function
+  console.log('Lottery draw is happening 🔮');
+  setTimeout(() => {
+    if (Math.random() >= 0.5) {
+      resolve('You WIN 💰');
+    } else {
+      reject(new Error('Oh no... you lost your money 💩'));
+    }
+  }, 2000);
+});
+
+lotteryPromise.then(res => console.log(res)).catch(err => console.error(err));
+
+// Promisifying setTimeout
+const wait = function (seconds) {
+  return new Promise(function (resolve) {
+    setTimeout(resolve, seconds * 1000);
+  });
+};
+
+wait(1)
+  .then(() => {
+    console.log('1 second passed');
+    return wait(1);
+  })
+  .then(() => {
+    console.log('2 seconds passed');
+    return wait(1);
+  })
+  .then(() => {
+    console.log('3 seconds passed');
+    return wait(1);
+  })
+  .then(() => console.log('4 seconds passed'));
+
+// setTimeout(() => {
+//   console.log('1 sec');
+//   setTimeout(() => {
+//     console.log('2 sec');
+//     setTimeout(() => {
+//       console.log('3 sec');
+//       setTimeout(() => {
+//         console.log('4 sec');
+//       }, 1000);
+//     }, 1000);
+//   }, 1000);
+// }, 1000);
+
+Promise.resolve('abc').then(res => console.log(res));
+Promise.reject(new Error('abc')).catch(res => console.error(res));
+*/
+
+/////////////////////////////////////////////////////////////////////
+// Promisifying the Geolocation API
+
+const getPosition = function () {
+  return new Promise((resolve, reject) => {
+    // navigator.geolocation.getCurrentPosition(
+    //   position => resolve(position),
+    //   err => reject(new Error(err))
+    // );
+    navigator.geolocation.getCurrentPosition(resolve, reject);
+  });
+};
+
+// getPosition().then(pos => console.log(pos));
+
+const whereAmI = function () {
+  getPosition()
+    .then(pos => {
+      const { latitude: lat, longitude: lng } = pos.coords;
+
+      return fetch(
+        `https://api-bdc.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}`
+      );
+    })
+    .then(response => {
+      if (!response.ok)
+        throw new Error(
+          `Oops... Something went wrong! Looks like we have a bad request. (${response.status})`
+        );
+
+      return response.json();
+    })
+    .then(data => {
+      console.log(data);
+      console.log(
+        `You are in ${data.principalSubdivision}, ${data.countryName}`
+      );
+
+      return fetch(`https://restcountries.com/v3.1/name/${data.countryName}`);
+    })
+    .then(res => {
+      if (!res.ok) throw new Error(`Country not found (${res.status})`);
+
+      return res.json();
+    })
+    .then(data => console.log(data[0]))
+    .catch(err => console.error(err.message))
+    .finally((countriesContainer.style.opacity = 1));
+};
+btn.addEventListener('click', whereAmI);
