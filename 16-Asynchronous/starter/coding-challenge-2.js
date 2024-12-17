@@ -1,10 +1,10 @@
 'use strict';
 
+const imgContainer = document.querySelector('.images');
+
 const wait = function (seconds) {
   return new Promise(resolve => setTimeout(resolve, seconds * 1000));
 };
-
-const imgContainer = document.querySelector('.images');
 
 const createImage = function (imgPath) {
   return new Promise((resolve, reject) => {
