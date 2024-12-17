@@ -69,7 +69,7 @@ const renderCountry = function (data, className = '') {
         </article>`;
 
   countriesContainer.insertAdjacentHTML('beforeend', html);
-  // countriesContainer.style.opacity = 1;
+  countriesContainer.style.opacity = 1;
 };
 /*
 const getCountryAndNeighbor = function (country) {
@@ -172,14 +172,14 @@ const getCountryData = function (country) {
     .then(data => renderCountry(data[0], 'neighbour'));
 };
 getCountryData('germany');
-
+*/
 ////////////////////////////////////////////////////////
 // Handling Rejected Promises
 const renderError = function (msg) {
   countriesContainer.insertAdjacentText('beforeend', msg);
-  // countriesContainer.style.opacity = 1;
+  countriesContainer.style.opacity = 1;
 };
-
+/*
 const getCountryData = function (country) {
   // Country 1
   fetch(`https://restcountries.com/v3.1/name/${country}`)
@@ -334,7 +334,7 @@ wait(1)
 
 Promise.resolve('abc').then(res => console.log(res));
 Promise.reject(new Error('abc')).catch(res => console.error(res));
-*/
+
 
 /////////////////////////////////////////////////////////////////////
 // Promisifying the Geolocation API
@@ -386,3 +386,152 @@ const whereAmI = function () {
     .finally((countriesContainer.style.opacity = 1));
 };
 btn.addEventListener('click', whereAmI);
+
+
+////////////////////////////////////////////////////////////////////////
+// Consuming Promises with ASYNC/AWAIT
+
+const getPosition = function () {
+  return new Promise((resolve, reject) => {
+    navigator.geolocation.getCurrentPosition(resolve, reject);
+  });
+};
+
+// fetch(`https://restcountries.com/v3.1/name/${country}`).then(res =>
+//   console.log(res)
+// );
+
+const whereAmI = async function () {
+  // Geolocation
+  const pos = await getPosition();
+  const { latitude: lat, longitude: lng } = pos.coords;
+
+  // Reverse geolocation
+  const resGeo = await fetch(
+    `https://api-bdc.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}`
+  );
+  const dataGeo = await resGeo.json();
+  console.log(dataGeo);
+
+  // Country data
+  const res = await fetch(
+    `https://restcountries.com/v3.1/name/${dataGeo.countryCode}`
+  );
+  const data = await res.json();
+  console.log(data);
+  renderCountry(data[8]);
+};
+btn.addEventListener('click', whereAmI);
+console.log('FIRST');
+
+////////////////////////////////////////////////////////////////////////////////
+// Error Handling with TRY...CATCH
+// try {
+//   let y = 1;
+//   const x = 2;
+
+//   x = 3;
+// } catch (err) {
+//   console.error(new Error(err.message));
+// }
+
+const getPosition = function () {
+  return new Promise((resolve, reject) => {
+    navigator.geolocation.getCurrentPosition(resolve, reject);
+  });
+};
+
+const whereAmI = async function () {
+  try {
+    // Geolocation
+    const pos = await getPosition();
+    const { latitude: lat, longitude: lng } = pos.coords;
+
+    // Reverse geolocation
+    const resGeo = await fetch(
+      `https://api-bdc.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}`
+    );
+    if (!resGeo.ok) throw new Error('Problem getting location data');
+
+    const dataGeo = await resGeo.json();
+
+    // Country data
+    const res = await fetch(
+      `https://restcountries.com/v3.1/name/${dataGeo.countryCode}`
+    );
+    if (!res.ok) throw new Error('Problem getting country');
+
+    const data = await res.json();
+    renderCountry(data[8]);
+  } catch (err) {
+    console.error(err);
+    renderError(`Oops... 💩 ${err.message}`);
+  }
+};
+btn.addEventListener('click', whereAmI);
+console.log('FIRST');
+*/
+///////////////////////////////////////////////////////////////////////
+// Returning Values from ASYNC Functions
+const getPosition = function () {
+  return new Promise((resolve, reject) => {
+    navigator.geolocation.getCurrentPosition(resolve, reject);
+  });
+};
+
+const whereAmI = async function () {
+  try {
+    // Geolocation
+    const pos = await getPosition();
+    const { latitude: lat, longitude: lng } = pos.coords;
+
+    // Reverse geolocation
+    const resGeo = await fetch(
+      `https://api-bdc.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}`
+    );
+    if (!resGeo.ok) throw new Error('Problem getting location data');
+
+    const dataGeo = await resGeo.json();
+    // console.log(dataGeo);
+
+    // Country data
+    const res = await fetch(
+      `https://restcountries.com/v3.1/name/${dataGeo.countryCode}`
+    );
+    if (!res.ok) throw new Error('Problem getting country');
+
+    const data = await res.json();
+    renderCountry(data[8]);
+
+    return `You are in ${dataGeo.city}, ${dataGeo.principalSubdivision}`;
+  } catch (err) {
+    console.error(err);
+    renderError(`Oops... 💩 ${err.message}`);
+
+    // reject promise returned from async function
+    throw err;
+  }
+};
+
+// console.log('1: Will get location');
+// const myLocation = whereAmI();
+// console.log(myLocation);
+
+// whereAmI()
+//   .then(location => console.log(`2: ${location}`))
+//   .catch(err => console.error(`2: ${err.message} 💩`))
+//   .finally(() => console.log('3: Finished getting location'));
+
+(async function () {
+  console.log('1: Will get location');
+  try {
+    const location = await whereAmI();
+    console.log(`2: ${location}`);
+  } catch (err) {
+    console.error(`2: ${err.message} 💩`);
+  }
+  console.log('3: Finsihed getting location');
+})();
+
+//////////////////////////////////////////////////////////////////////
+// Running Promises in Parallel

@@ -26,6 +26,7 @@ let currentImg;
 createImage('./img/img-1.jpg')
   .then(img => {
     currentImg = img;
+
     return wait(2);
   })
   .then(() => {
@@ -35,6 +36,7 @@ createImage('./img/img-1.jpg')
   })
   .then(img => {
     currentImg = img;
+
     return wait(2);
   })
   .then(() => {
