@@ -1,6 +1,12 @@
 // Exporting module
 console.log('Exporting module');
 
+// Blocking code
+// The code in script.js has to wait for this code to finich before executing
+// console.log('Start fetching users');
+// await fetch('https://jsonplaceholder.typicode.com/users');
+// console.log('Finish fetching users');
+
 const shippingCost = 10;
 export const cart = [];
 
