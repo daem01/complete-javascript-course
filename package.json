@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "autoprefixer": "^9.8.0",
-    "live-server": "^1.2.2"
-  }
-}
